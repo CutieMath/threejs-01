@@ -1,10 +1,12 @@
 import "./styles.css";
 import styled from "styled-components";
+import { Suspense } from "react";
 
 import Background from "./components/Background";
 import TextSection from "./components/TextSection";
 import Box from "./components/Box";
 import { Canvas } from "@react-three/fiber";
+import { OrbitControls } from "@react-three/drei";
 
 export default function App() {
   return (
@@ -12,7 +14,12 @@ export default function App() {
       <Background />
       <TextSection />
       <Canvas className="canvas">
-        <Box />
+        <OrbitControls enableZoom={false} />
+        <ambientLight intensity={0.5} />
+        <directionalLight position={[-2, 5, 2]} intensity={1} />
+        <Suspense fallback={null}>
+          <Box />
+        </Suspense>
       </Canvas>
     </Wrapper>
   );
